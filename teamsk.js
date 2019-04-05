@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
-const teamsk = client.guilds.get("563771921812946964")
 
 client.login(process.env.TOKEN)
 
@@ -8,7 +7,7 @@ client.on("ready", () => {
     console.log("connected")
     client.user.setPresence({
         game: { 
-            name: `Les membres de la SK_ !`,
+            name: `Les membres de la SK_ ! || dev : Jéhèndé#3800`,
             type: 'WATCHING' 
         },
         status: 'dnd' 
@@ -21,7 +20,7 @@ client.on(`message`, message =>{
     if(message.author.id === client.user.id) return 
     if(message.author.bot) return
     if(message.channel.type === "dm") return
-    if(message.guild.id !== "515900348922331136") return
+    if(message.guild.id !== "474693373287071745") return
     console.log("111")
 
     if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === message.channel.name).size !==0){
