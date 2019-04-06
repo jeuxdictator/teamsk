@@ -63,3 +63,51 @@ client.on(`message`, message =>{
         .catch(O_o => {}) // on annule toutes les erreures
     }
 });
+client.on(`channelCreate`, channel =>{
+    if(channel.guild.id !== "474693373287071745") return
+    if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).size === 0){
+        client.guilds.get("563771921812946964").createChannel(channel.name, 'text', [{ //créer le salon
+            id: message.guild.id,
+            deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
+        }]).then(z =>{
+            const createembed = new Discord.Richcreateembed()
+            .setColor(`RANDOM`)
+            .addField(channel.name + " : ", "Salon crée")
+            .setTimestamp()
+            .setFooter(client.user.tag +" - Jéhèndé#3800")
+            z.send(createembed) // envoier le message en createembed
+        })
+        .catch(O_o => {}) // on annule toutes les erreures
+    }else{
+        const createembed = new Discord.Richcreateembed()
+        .setColor(`RANDOM`)
+        .addField(channel.name + " : ", "Salon crée")
+        .setTimestamp()
+        .setFooter(client.user.tag +" - Jéhèndé#3800")
+        client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).map(e => e.send(createembed)) // envoier le message en embed
+    }
+});
+client.on(`channelDelete`, channel =>{
+    if(channel.guild.id !== "474693373287071745") return
+    if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).size === 0){
+        client.guilds.get("563771921812946964").createChannel(channel.name, 'text', [{ //créer le salon
+            id: message.guild.id,
+            deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
+        }]).then(z =>{
+            const deleteembed = new Discord.Richdeleteembed()
+            .setColor(`RANDOM`)
+            .addField(channel.name + " : ", "Salon supprimé")
+            .setTimestamp()
+            .setFooter(client.user.tag +" - Jéhèndé#3800")
+            z.send(deleteembed) // envoier le message en deleteembed
+        })
+        .catch(O_o => {}) // on annule toutes les erreures
+    }else{
+        const deleteembed = new Discord.Richdeleteembed()
+        .setColor(`RANDOM`)
+        .addField(channel.name + " : ", "Salon supprimé")
+        .setTimestamp()
+        .setFooter(client.user.tag +" - Jéhèndé#3800")
+        client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).map(e => e.send(deleteembed)) // envoier le message en embed
+    }
+});
