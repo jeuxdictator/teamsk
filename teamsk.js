@@ -67,7 +67,7 @@ client.on(`channelCreate`, channel =>{
     if(channel.guild.id !== "474693373287071745") return
     if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).size === 0){
         client.guilds.get("563771921812946964").createChannel(channel.name, 'text', [{ //créer le salon
-            id: message.guild.id,
+            id: channel.guild.id,
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
             const createembed = new Discord.Richcreateembed()
@@ -91,7 +91,7 @@ client.on(`channelDelete`, channel =>{
     if(channel.guild.id !== "474693373287071745") return
     if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).size === 0){
         client.guilds.get("563771921812946964").createChannel(channel.name, 'text', [{ //créer le salon
-            id: message.guild.id,
+            id: channel.guild.id,
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
             const deleteembed = new Discord.Richdeleteembed()
