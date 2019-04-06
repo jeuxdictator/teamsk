@@ -70,7 +70,7 @@ client.on(`channelCreate`, channel =>{
             id: channel.guild.id,
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
-            const createembed = new Discord.Richcreateembed()
+            const createembed = new Discord.Richembed()
             .setColor(`RANDOM`)
             .addField(channel.name + " : ", "Salon crée")
             .setTimestamp()
@@ -79,7 +79,7 @@ client.on(`channelCreate`, channel =>{
         })
         .catch(O_o => {}) // on annule toutes les erreures
     }else{
-        const createembed = new Discord.Richcreateembed()
+        const createembed = new Discord.Richembed()
         .setColor(`RANDOM`)
         .addField(channel.name + " : ", "Salon crée")
         .setTimestamp()
@@ -94,7 +94,7 @@ client.on(`channelDelete`, channel =>{
             id: channel.guild.id,
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
-            const deleteembed = new Discord.Richdeleteembed()
+            const deleteembed = new Discord.Richembed()
             .setColor(`RANDOM`)
             .addField(channel.name + " : ", "Salon supprimé")
             .setTimestamp()
@@ -103,7 +103,7 @@ client.on(`channelDelete`, channel =>{
         })
         .catch(O_o => {}) // on annule toutes les erreures
     }else{
-        const deleteembed = new Discord.Richdeleteembed()
+        const deleteembed = new Discord.Richembed()
         .setColor(`RANDOM`)
         .addField(channel.name + " : ", "Salon supprimé")
         .setTimestamp()
