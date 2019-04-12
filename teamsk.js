@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 //constantes
 
-client.login(process.env.TOKEN)
+client.login("NTYzNzcyMjM4MzczOTc4MTMz.XKeQew.PEupQJFy2cMvj2tqH3PmGOM_HDo")
 //connexion du bot
 
 client.on("ready", () => {
@@ -43,7 +43,7 @@ client.on(`message`, message =>{
         const embed = new Discord.RichEmbed()
         .addField(message.author.tag + " : ", message.content)
         .setTimestamp()
-        .setFooter(client.user.tag +" - Jéhèndé#3800")
+        .setFooter(message.guild.members.get(message.author.id).displayName +" - Jéhèndé#3800")
         .setAuthor("-", message.author.avatarURL)
         client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === message.channel.name).map(e => e.send(embed)) // envoier le message en embed
     }else{
@@ -52,7 +52,7 @@ client.on(`message`, message =>{
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
             const embed = new Discord.RichEmbed()
-            .addField(message.author.tag + " : ", message.content)
+            .addField(message.guild.members.get(message.author.id).displayName + " : ", message.content)
             .setTimestamp()
             .setFooter(client.user.tag +" - Jéhèndé#3800")
             .setAuthor("-", message.author.avatarURL)
