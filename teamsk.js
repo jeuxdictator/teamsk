@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 //constantes
 
-client.login(process.env.TOKEN)
+client.login("NTYzNzcyMjM4MzczOTc4MTMz.XKeQew.PEupQJFy2cMvj2tqH3PmGOM_HDo")
 //connexion du bot
 
 client.on("ready", () => {
@@ -60,6 +60,7 @@ client.on(`message`, message =>{
         })
         .catch(O_o => {}) // on annule toutes les erreures
     }
+    console.log(message.mentions) // test
 });
 client.on(`channelCreate`, channel =>{
     if(channel.guild.id !== "474693373287071745") return
@@ -130,3 +131,8 @@ client.on(`channelUpdate`, function(oldChannel, newChannel){
         client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === oldChannel.name).map(e => e.setName(`${newChannel.name}`).then(v => v.send(renameembed))) // envoier le message en embed
     }
 });
+client.on(`guildMemberAdd`, GuildMember => {
+    if(client.guilds.get("563771921812946964").members.get(GuildMember.id)){
+        GuildMember.send("ok")
+    }
+})
