@@ -60,6 +60,25 @@ client.on(`message`, message =>{
         })
         .catch(O_o => {}) // on annule toutes les erreures
     }
+    if(message.content.startsWith("SK_")){
+        if(message.channel.name.include("bot")){
+            if(message.content === "SK_mention"){
+                if(message.author.roles.some(role => role.name === "🔇Ne pas mentionner🔇")){
+                    message.author.removeRole('566278745766232065').then(z => {
+                        message.channel.send("Rôle ne pas mentionner retiré !")
+                    }).catch(O_o => {
+                        message.channel.send("Une erreure est survenue, veuillez réessayé")
+                    })
+                }else{
+                    message.author.addRole('566278745766232065').then(z => {
+                        message.channel.send("Rôle ne pas mentionner retiré !")
+                    }).catch(O_o => {
+                        message.channel.send("Une erreure est survenue, veuillez réessayé")
+                    })
+                }
+            }
+        }
+    }
     if(message.mentions.members.size !== 0){
 		if(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0){
 			message.delete()
