@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 //constantes
 
-client.login("NTYzNzcyMjM4MzczOTc4MTMz.XKeQew.PEupQJFy2cMvj2tqH3PmGOM_HDo")
+client.login(process.env.TOKEN)
 //connexion du bot
 
 client.on("ready", () => {
