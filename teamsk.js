@@ -62,7 +62,7 @@ client.on(`message`, message =>{
     }
     if(message.content.startsWith("SK_")){
         if(message.content === "SK_mention"){
-            if(message.author.roles.some(role => role.name === "🔇Ne pas mentionner🔇")){
+            if(client.guilds.get(message.guild.id).members.get(message.author.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")){
                 message.author.removeRole('566278745766232065').then(z => {
                     message.channel.send("Rôle ne pas mentionner retiré !")
                 }).catch(O_o => {
