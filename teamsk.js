@@ -87,10 +87,10 @@ client.on(`message`, message =>{
 			.setFooter("SK_Bot")
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
-            message.channel.overwritePermissions(message.author, { SEND_MESSAGES: false}).then(member => {
+            client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
                 message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
-                        message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true});
+                        client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
                         z.delete().catch(O_o => {})},
                     30000)
                 })
