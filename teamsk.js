@@ -63,13 +63,13 @@ client.on(`message`, message =>{
     if(message.content.startsWith("SK_")){
         if(message.content === "SK_mention"){
             if(client.guilds.get(message.guild.id).members.get(message.author.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")){
-                message.author.removeRole('566278745766232065').then(z => {
+                client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('566278745766232065').then(z => {
                     message.channel.send("Rôle ne pas mentionner retiré !")
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
                 })
             }else{
-                message.author.addRole('566278745766232065').then(z => {
+                client.guilds.get(message.guild.id).members.get(message.author.id).addRole('566278745766232065').then(z => {
                     message.channel.send("Rôle ne pas mentionner retiré !")
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
@@ -92,7 +92,7 @@ client.on(`message`, message =>{
                     setTimeout(function(){
                         message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true});
                         z.delete().catch(O_o => {})},
-                    10000)
+                    30000)
                 })
             })
 		}
