@@ -41,7 +41,7 @@ client.on(`message`, message =>{
 
     if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === message.channel.name).size !==0){ // si le salon du message existe dans la team de backup et que c'est un salon textuel 
         const embed = new Discord.RichEmbed()
-        .addField(message.author.tag + " : ", message.content)
+        .addField(message.author.tag + " : ", message.content + "-"))
         .setTimestamp()
         .setFooter(message.guild.members.get(message.author.id).displayName +" - Jéhèndé#3800")
         .setAuthor("-", message.author.avatarURL)
@@ -52,7 +52,7 @@ client.on(`message`, message =>{
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
             const embed = new Discord.RichEmbed()
-            .addField(message.guild.members.get(message.author.id).displayName + " : ", message.content)
+            .addField(message.guild.members.get(message.author.id).displayName + " : ", message.content + "-")
             .setTimestamp()
             .setFooter(client.user.tag +" - Jéhèndé#3800")
             .setAuthor("-", message.author.avatarURL)
