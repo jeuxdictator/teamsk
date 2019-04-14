@@ -60,7 +60,26 @@ client.on(`message`, message =>{
         })
         .catch(O_o => {}) // on annule toutes les erreures
     }
-    console.log(message.mentions) // test
+    if(message.mentions.members.size !== 0){
+		if(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0){
+			message.delete()
+			const mentionnopembed = new Discord.RichEmbed()
+            .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
+			.addField("message :", message.content )
+			.setTimestamp()
+			.setFooter("SK_Bot")
+            .setAuthor(message.author.username, message.author.avatarURL)
+            message.channel.send(mentionnopembed)
+            message.channel.overwritePermissions(message.author, { SEND_MESSAGES: false}).then(member => {
+                message.channel.send(`${message.author.username} tu seras mute pendant 10 secondes !`).then(z => {
+                    setTimeout(function(){
+                        message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true});
+                        z.delete().catch(O_o => {})},
+                    10000)
+                })
+            })
+		}
+    }
 });
 client.on(`channelCreate`, channel =>{
     if(channel.guild.id !== "474693373287071745") return
@@ -131,8 +150,3 @@ client.on(`channelUpdate`, function(oldChannel, newChannel){
         client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === oldChannel.name).map(e => e.setName(`${newChannel.name}`).then(v => v.send(renameembed))) // envoier le message en embed
     }
 });
-client.on(`guildMemberAdd`, GuildMember => {
-    if(client.guilds.get("563771921812946964").members.get(GuildMember.id)){
-        GuildMember.send("ok")
-    }
-})
