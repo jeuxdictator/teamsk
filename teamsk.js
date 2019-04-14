@@ -64,13 +64,13 @@ client.on(`message`, message =>{
         if(message.content === "SK_mention"){
             if(client.guilds.get(message.guild.id).members.get(message.author.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")){
                 client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('566278745766232065').then(z => {
-                    message.channel.send("Rôle ne pas mentionner retiré !")
+                    message.channel.send("le rôle \"ne pas mentionner\" vous a été retiré !")
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
                 })
             }else{
                 client.guilds.get(message.guild.id).members.get(message.author.id).addRole('566278745766232065').then(z => {
-                    message.channel.send("Rôle ne pas mentionner retiré !")
+                    message.channel.send("le rôle \"ne pas mentionner\" vous a été ajouté !")
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
                 })
