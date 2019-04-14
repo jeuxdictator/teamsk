@@ -88,7 +88,7 @@ client.on(`message`, message =>{
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
             message.channel.overwritePermissions(message.author, { SEND_MESSAGES: false}).then(member => {
-                message.channel.send(`${message.author.username} tu seras mute pendant 10 secondes !`).then(z => {
+                message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
                         message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true});
                         z.delete().catch(O_o => {})},
