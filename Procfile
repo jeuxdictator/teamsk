@@ -1,1 +1,1 @@
-worker: node teamsk.js
+worker: node PieuvreBot.js
