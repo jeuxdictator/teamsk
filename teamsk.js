@@ -38,12 +38,16 @@ client.on(`message`, message =>{
     //anti dm
     if(message.guild.id !== "474693373287071745") return
     //anti boucles
-
+    if(client.guilds.get(message.guild.id).members.get(message.author.id).nickname){
+        var user = client.guilds.get(message.guild.id).members.get(message.author.id).nickname
+    }else{
+        var user = message.author.username
+    }
     if(client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === message.channel.name).size !==0){ // si le salon du message existe dans la team de backup et que c'est un salon textuel 
         const embed = new Discord.RichEmbed()
-        .addField(message.author.tag + " : ", message.content + "-")
+        .addField(user + " : ", message.content + "-")
         .setTimestamp()
-        .setFooter(message.guild.members.get(message.author.id).displayName +" - Jéhèndé#3800")
+        .setFooter(client.user.tag +" - Jéhèndé#3800")
         .setAuthor("-", message.author.avatarURL)
         client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === message.channel.name).map(e => e.send(embed)) // envoier le message en embed
     }else{
@@ -52,7 +56,7 @@ client.on(`message`, message =>{
             deny: ['MANAGE_MESSAGES', 'SEND_MESSAGES']
         }]).then(z =>{
             const embed = new Discord.RichEmbed()
-            .addField(message.guild.members.get(message.author.id).displayName + " : ", message.content + "-")
+            .addField(user + " : ", message.content + "-")
             .setTimestamp()
             .setFooter(client.user.tag +" - Jéhèndé#3800")
             .setAuthor("-", message.author.avatarURL)
@@ -71,8 +75,11 @@ client.on(`message`, message =>{
             }else{
                 client.guilds.get(message.guild.id).members.get(message.author.id).addRole('566278745766232065').then(z => {
                     message.channel.send("le rôle \"ne pas mentionner\" vous a été ajouté !")
+                    client.guilds.get(message.guild.id).members.get(message.author.id).setNickname(user + ' | 🔇')
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
+                    var usernot = user.replace(/' | 🔇'/gi, "k")
+                    client.guilds.get(message.guild.id).members.get(message.author.id).setNickname(usernot)
                 })
             }
         }
