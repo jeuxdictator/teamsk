@@ -78,10 +78,22 @@ client.on(`message`, message =>{
                     client.guilds.get(message.guild.id).members.get(message.author.id).setNickname(user + ' | 🔇')
                 }).catch(O_o => {
                     message.channel.send("Une erreure est survenue, veuillez réessayé")
-                    var usernot = user.replace(/' | 🔇'/gi, "k")
+                    var usernot = user.replace(/ \| 🔇/gi, " ")
                     client.guilds.get(message.guild.id).members.get(message.author.id).setNickname(usernot)
                 })
             }
+        }
+        if(message.content === "SK_help"){
+            var help_embed = new Discord.RichEmbed()
+            .setColor("18d67e")
+            .setTitle("Tu as besoin d'aide ?")
+            .setThumbnail(message.author.avatarURL)
+            .setDescription("Je suis là pour vous aider.")
+            .addField("Aides", `voicis de l'aide !`)
+            .addField(":tools: Modération", "Fais `SK_mention` pour Avoir le rôle d'anti mention !")
+            .setTimestamp()
+            .setFooter("SK_Bot - JeuxGate")
+            message.channel.send(help_embed);
         }
     }
     if(message.mentions.members.size !== 0){
