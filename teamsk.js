@@ -119,7 +119,7 @@ client.on(`message`, message =>{
 			const mentionnopembed = new Discord.RichEmbed()
             .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
             .addField("message :", message.content )
-            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().nickname + "Si tu penses qu'il ne dvrait pas être mute", "tape `SK_demute` et sera demute !")
+            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().nickname + "Si tu penses qu'il ne devrait pas être mute", "tape `SK_demute` et sera demute !")
 			.setTimestamp()
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL)
