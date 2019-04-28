@@ -120,27 +120,27 @@ client.on(`message`, message =>{
             .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
 			.addField("message :", message.content )
 			.setTimestamp()
-			.setFooter("SK_Bot || test : " +message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first())
+			.setFooter("SK_Bot ")
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
+            muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
+                who: member.id
+            };
+            fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+                if (err) message.channel.send(err);
+            });
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
-                muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
-                    who: member.id
-                }
-                fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
-                    if (err) message.channel.send(err);
-                })
                 message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
                         client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
                         z.delete().catch(O_o => {})},
-                        muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
-                            who: "nop"
-                        },
-                        fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
-                            if (err) message.channel.send(err);
-                        }),
                     30000)
+                    muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
+                        who: "nop"
+                    };
+                    fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+                        if (err) message.channel.send(err);
+                    });
                 })
             })
 		}
