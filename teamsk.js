@@ -96,7 +96,7 @@ client.on(`message`, message =>{
         }
         if(message.content === "SK_demute"){
             if(!muted["<@!" + message.author.id + ">"]){
-                return message.reply("Aucune personne n'est à demute.")
+                return message.reply("Aucune personne n'est à demute. array non set")
             }
             if(muted["<@!" + message.author.id + ">"].who !== "nop"){
                 if(client.guilds.get(message.guild.id).members.get(muted["<@!" + message.author.id + ">"].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
@@ -121,7 +121,7 @@ client.on(`message`, message =>{
 			.addField("message :", message.content )
 			.setTimestamp()
 			.setFooter("SK_Bot ")
-            .setAuthor(message.author.username, message.author.avatarURL)
+            .setAuthor(user, message.author.avatarURL)
             message.channel.send(mentionnopembed)
             muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
                 who: message.author.id
