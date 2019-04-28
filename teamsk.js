@@ -125,12 +125,12 @@ client.on(`message`, message =>{
             .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
 			.addField("message :", message.content )
 			.setTimestamp()
-			.setFooter("SK_Bot || test : " +message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first)
+			.setFooter("SK_Bot || test : " +message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first())
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
                 message.reply("role appliqué")
-                muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first] = {
+                muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
                     who: message.author.id
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
