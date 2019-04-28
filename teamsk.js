@@ -95,13 +95,13 @@ client.on(`message`, message =>{
             message.channel.send(help_embed);
         }
         if(message.content === "SK_demute"){
-            if(!muted["<@" + message.author.id + ">"]){
+            if(!muted["<@!" + message.author.id + ">"]){
                 return message.reply("Aucune personne n'est à demute.")
             }
-            if(muted["<@" + message.author.id + ">"].who !== "nop"){
+            if(muted["<@!" + message.author.id + ">"].who !== "nop"){
                 if(client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
                 client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).removeRole('474885335709515785').catch(z => message.channel.send("Une erreure est survenue !"))
-                muted["<@" + message.author.id + ">"] = {
+                muted["<@!" + message.author.id + ">"] = {
                     who: "nop"
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
@@ -125,7 +125,7 @@ client.on(`message`, message =>{
             message.channel.send(mentionnopembed)
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
                 muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
-                    who: member
+                    who: member.id
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
                     if (err) message.channel.send(err);
