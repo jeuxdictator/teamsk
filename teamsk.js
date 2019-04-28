@@ -95,13 +95,13 @@ client.on(`message`, message =>{
             message.channel.send(help_embed);
         }
         if(message.content === "SK_demute"){
-            if(!muted["<@!" + message.author.id + ">"]){
+            if(!muted[message.author.id]){
                 return message.reply("Aucune personne n'est à demute. array non set")
             }
-            if(muted["<@!" + message.author.id + ">"].who !== "nop"){
-                if(client.guilds.get(message.guild.id).members.get(muted["<@!" + message.author.id + ">"].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
-                client.guilds.get(message.guild.id).members.get(muted["<@!" + message.author.id + ">"].who).removeRole('474885335709515785').catch(z => message.channel.send("Une erreure est survenue !"))
-                muted["<@!" + message.author.id + ">"] = {
+            if(muted[message.author.id].who !== "nop"){
+                if(client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
+                client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).removeRole('474885335709515785').catch(z => message.channel.send("Une erreure est survenue !"))
+                muted[message.author.id] = {
                     who: "nop"
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
@@ -123,7 +123,7 @@ client.on(`message`, message =>{
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL)
             message.channel.send(mentionnopembed)
-            muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
+            muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().id] = {
                 who: message.author.id
             };
             fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
