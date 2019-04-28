@@ -96,12 +96,7 @@ client.on(`message`, message =>{
         }
         if(message.content === "SK_demute"){
             if(!muted["<@" + message.author.id + ">"]){
-                muted["<@" + message.author.id + ">"] = {
-                    who: "nop"
-                }
-                fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
-                    if (err) message.channel.send(err);
-                })
+                return message.reply("Aucune personne n'est à demute.")
             }
             if(muted["<@" + message.author.id + ">"].who !== "nop"){
                 if(client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
