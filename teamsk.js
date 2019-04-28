@@ -129,7 +129,7 @@ client.on(`message`, message =>{
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
-                muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first.id] = {
+                muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first] = {
                     who: message.author.id
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
