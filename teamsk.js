@@ -3,6 +3,7 @@ const client = new Discord.Client()
 //constantes
 
 client.login(process.env.TOKEN)
+var muted = JSON.parse(fs.readFileSync('muted.json', 'utf-8'));
 //connexion du bot
 
 client.on("ready", () => {
@@ -26,9 +27,6 @@ client.on("ready", () => {
         })},
     5000)
 });
-
-
-
 client.on(`message`, message =>{
     if(message.author.id === client.user.id) return 
     if(message.author.bot) return
@@ -107,10 +105,22 @@ client.on(`message`, message =>{
             .setAuthor(message.author.username, message.author.avatarURL)
             message.channel.send(mentionnopembed)
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
+                muted[message.author.id] = {
+                    who = message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first.id
+                }
+                fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+                    if (err) message.channel.send(err);
+                });
                 message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
                         client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
                         z.delete().catch(O_o => {})},
+                        muted[message.author.id] = {
+                            who = "nop"
+                        },
+                        fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+                            if (err) message.channel.send(err);
+                        });
                     30000)
                 })
             })
