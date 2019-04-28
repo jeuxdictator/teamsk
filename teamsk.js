@@ -95,18 +95,18 @@ client.on(`message`, message =>{
             message.channel.send(help_embed);
         }
         if(message.content === "SK_demute"){
-            if(!muted[message.author.id]){
-                muted[message.author.id] = {
+            if(!muted["<@" + message.author.id + ">"]){
+                muted["<@" + message.author.id + ">"] = {
                     who: "nop"
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
                     if (err) message.channel.send(err);
                 })
             }
-            if(muted[message.author.id].who !== "nop"){
+            if(muted["<@" + message.author.id + ">"].who !== "nop"){
                 if(client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).size === 0) message.reply("la personne a démute n'a pas été trouvé !")
                 client.guilds.get(message.guild.id).members.get(muted[message.author.id].who).removeRole('474885335709515785').catch(z => message.channel.send("Une erreure est survenue !"))
-                muted[message.author.id] = {
+                muted["<@" + message.author.id + ">"] = {
                     who: "nop"
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
@@ -135,7 +135,7 @@ client.on(`message`, message =>{
                 }
                 fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
                     if (err) message.channel.send(err);
-                });
+                })
                 message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
                         client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
