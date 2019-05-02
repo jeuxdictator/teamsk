@@ -35,7 +35,7 @@ client.on(`message`, message =>{
 
     if(message.channel.type === "dm") return
     //anti dm
-    if(message.guild.id !== "474693373287071745") return
+    if(message.guild.id !== "474693373287071745") return message.reply("**Je suis désolé, or je n'ai pas encore de commandes**")
     //anti boucles
     if(client.guilds.get(message.guild.id).members.get(message.author.id).nickname){
         var user = client.guilds.get(message.guild.id).members.get(message.author.id).nickname
@@ -116,32 +116,40 @@ client.on(`message`, message =>{
     if(message.mentions.members.size !== 0){
 		if(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0){
 			message.delete()
-			const mentionnopembed = new Discord.RichEmbed()
-            .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
-            .addField("message :", message.content )
-            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().nickname + "Si tu penses qu'il ne devrait pas être mute", "tape `SK_demute` et sera demute !")
-			.setTimestamp()
-			.setFooter("SK_Bot ")
-            .setAuthor(user, message.author.avatarURL)
-            message.channel.send(mentionnopembed)
             muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().id] = {
                 who: message.author.id
             };
             fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
                 if (err) message.channel.send(err);
             });
+            const re = new Discord.RichEmbed()
+            .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
+            .addField("message :", message.content )
+            .setTimestamp()
+            .setFooter("SK_Bot ")
+            .setAuthor(user, message.author.avatarURL);
+			const mentionnopembed = new Discord.RichEmbed()
+            .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
+            .addField("message :", message.content )
+            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().nickname + "Si tu penses qu'il ne devrait pas être mute", "tape `SK_demute` et sera demute !")
+			.setTimestamp()
+			.setFooter("SK_Bot ")
+            .setAuthor(user, message.author.avatarURL);
+            message.channel.send(mentionnopembed).then(y => {
             client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
                 message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
                     setTimeout(function(){
                         client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
-                        z.delete().catch(O_o => {})},
-                    30000)
-                    muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
-                        who: "nop"
-                    };
-                    fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
-                        if (err) message.channel.send(err);
-                    });
+                        z.delete().catch(O_o => {});
+                        y.edit(re);
+                        muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
+                            who: "nop"
+                        };
+                        fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+                            if (err) message.channel.send(err);
+                        });
+                        message.channel.send("ok debug")
+                        , 30000})})
                 })
             })
 		}
