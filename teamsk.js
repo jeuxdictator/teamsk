@@ -136,21 +136,21 @@ client.on(`message`, message =>{
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL);
             message.channel.send(mentionnopembed).then(y => {
-            client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
-                message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
-                    setTimeout(function(){
-                        client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
-                        z.delete().catch(O_o => {});
-                        y.edit(re);
-                        muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
-                            who: "nop"
-                        };
-                        fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
-                            if (err) message.channel.send(err);
-                        });
-                        message.channel.send("ok debug")
-                        , 30000})})
-                })
+				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
+					message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
+						setTimeout(function(){
+							client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
+							z.delete().catch(O_o => {});
+							y.edit(re);
+						, 30000})
+						muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
+							who: "nop"
+						};
+						fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
+							if (err) message.channel.send(err);
+						});
+					})
+				})
             })
 		}
     }
