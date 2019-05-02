@@ -135,7 +135,7 @@ client.on(`message`, message =>{
 			.setTimestamp()
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL);
-            message.channel.send(mentionnopembed).then(y =>
+            message.channel.send(mentionnopembed).then(y => {
 			client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
 				message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
 					setTimeout(function(){
