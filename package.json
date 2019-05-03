@@ -6,11 +6,5 @@
   "license": "ISC",
   "engines": {
     "node": "10.3.0"
-  },
-  "dependencies": {
-    "discord.js": "^11.4.2",
-    "ffmpeg": "0.0.4",
-    "npm": "^6.6.0",
-    "vue-cli": "^2.9.6"
   }
 }
