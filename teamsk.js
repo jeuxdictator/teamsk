@@ -137,19 +137,18 @@ client.on(`message`, message =>{
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL);
             message.channel.send(mentionnopembed).then(y => {
-				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
-					setTimeout(function(){
-						client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785')
-						
-					, 30000})
-                                        y.edit(re);
+				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785')
+				setTimeout(function(){
+					y.edit(re);
 					muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
 						who: "nop"
 					};
 					fs.writeFile('muted.json', JSON.stringify(muted), (err) => {
 						if (err) message.channel.send(err);
 					});
-				})
+					client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785')
+
+				, 30000})
 			})
 		}
     }
