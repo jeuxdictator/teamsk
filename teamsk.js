@@ -131,16 +131,15 @@ client.on(`message`, message =>{
 			const mentionnopembed = new Discord.RichEmbed()
             .setTitle("Vous avez tenté de mentionner quelqu'un qu'on ne doit pas mentionner !")
             .addField("message :", message.content )
-            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().nickname + "Si tu penses qu'il ne devrait pas être mute", "tape `SK_demute` et sera demute !")
+            .addField(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().username + "Si tu penses qu'il ne devrait pas être mute", "tape `SK_demute` et sera demute !")
+			.addField(user, "Tu seras mute pendant 30 seconde !")
 			.setTimestamp()
 			.setFooter("SK_Bot ")
             .setAuthor(user, message.author.avatarURL);
             message.channel.send(mentionnopembed).then(y => {
-			client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
-				message.channel.send(`${message.author.username} tu seras mute pendant 30 secondes !`).then(z => {
+				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
 					setTimeout(function(){
 						client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
-						z.delete().catch(O_o => {});
 						y.edit(re)
 					, 30000})
 					muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
@@ -150,7 +149,6 @@ client.on(`message`, message =>{
 						if (err) message.channel.send(err);
 					});
 				})
-			})
 			})
 		}
     }
