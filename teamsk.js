@@ -51,7 +51,7 @@ client.on(`message`, message => {
         }
         if(message.content === "SK_role"){
             if(message.guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
-                message.channel.send("Rôle situé à la  " + message.guild.roles.filter(r => r.name === "Membre SK_").first().position + " position")
+                message.channel.send("Rôle situé à la  " + message.guild.roles.filter(r => r.name === "Membre SK_").first().position + " position (de bas en haut)")
             } else {
                 message.channel.send("Aucun rôle trouvé (il doit obligatoirement s'appeller `Membre SK_`) !")
             }
@@ -174,6 +174,17 @@ client.on(`message`, message => {
         }
     }
 });
+client.on(`guildMemberAdd`, member => {
+    if(member.guild.id !== "474693373287071745"){
+        if(member.guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
+            if(client.guilds.get("474693373287071745").members.get(member.id).size !== 0){
+                if(client.guilds.get("474693373287071745").members.get(member.id).roles.filter(z => z.name === "Membre SK_").size !== 0){
+                    member.addRole(member.guild.roles.filter(r => r.name === "Membre SK_").first().id)
+                }
+            }
+        }
+    }
+})
 client.on(`channelCreate`, channel => {
     if (channel.guild.id !== "474693373287071745") return
     if (client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === channel.name).size === 0) {
