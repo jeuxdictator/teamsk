@@ -148,7 +148,7 @@ client.on(`message`, message =>{
 					});
 					client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785')
 
-				, 30000})
+				}, 30000)
 			})
 		}
     }
