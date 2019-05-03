@@ -51,7 +51,7 @@ client.on(`message`, message => {
         }
         if(message.content === "SK_role"){
             if(message.guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
-                message.channel.send(message.guild.roles.filter(r => r.name === "Membre SK_").first.name + " à la  " + message.guild.roles.filter(r => r.name === "Membre SK_").first.position + " position")
+                message.channel.send("Rôle situé à la  " + message.guild.roles.filter(r => r.name === "Membre SK_").first().position + " position")
             } else {
                 message.channel.send("Aucun rôle trouvé (il doit obligatoirement s'appeller `Membre SK_`) !")
             }
