@@ -140,8 +140,9 @@ client.on(`message`, message =>{
 				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
 					setTimeout(function(){
 						client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
-						y.edit(re)
+						
 					, 30000})
+                                        y.edit(re);
 					muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first()] = {
 						who: "nop"
 					};
