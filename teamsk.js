@@ -256,6 +256,6 @@ client.on(`channelUpdate`, function (oldChannel, newChannel) {
 });
 client.on(`guildCreate`, guild => {
     if(guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
-        guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id)).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.filter(z => z.name === "Membre SK_")).map(i => i.addRole(member.guild.roles.filter(r => r.name === "Membre SK_").first().id))
+        guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id)).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.filter(z => z.name === "Membre SK_")).map(i => i.addRole(guild.roles.filter(r => r.name === "Membre SK_").first().id))
     }
 })
