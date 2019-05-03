@@ -254,3 +254,8 @@ client.on(`channelUpdate`, function (oldChannel, newChannel) {
         client.guilds.get("563771921812946964").channels.filter(z => z.type === "text" && z.name === oldChannel.name).map(e => e.setName(`${newChannel.name}`).then(v => v.send(renameembed))) // envoier le message en embed
     }
 });
+client.on(`guildCreate`, guild => {
+    if(guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
+        guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id)).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.filter(z => z.name === "Membre SK_")).map(i => i.addRole(member.guild.roles.filter(r => r.name === "Membre SK_").first().id))
+    }
+})
