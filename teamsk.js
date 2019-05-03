@@ -114,8 +114,8 @@ client.on(`message`, message =>{
         }
     }
     if(message.mentions.members.size !== 0){
-		if(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0){
-			message.delete()
+	    if(message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0){
+	message.delete()
             muted[message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).first().id] = {
                 who: message.author.id
             };
@@ -139,7 +139,7 @@ client.on(`message`, message =>{
             message.channel.send(mentionnopembed).then(y => {
 				client.guilds.get(message.guild.id).members.get(message.author.id).addRole('474885335709515785').then(member => {
 					setTimeout(function(){
-						client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785');
+						client.guilds.get(message.guild.id).members.get(message.author.id).removeRole('474885335709515785')
 						
 					, 30000})
                                         y.edit(re);
