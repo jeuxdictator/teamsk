@@ -36,8 +36,8 @@ client.on(`message`, message => {
     if (message.channel.type === "dm") return
     //anti dm
     if (message.guild.id !== "474693373287071745") {
-        if(!message.content.startsWith("SK_")) return
-        if(message.content === " SK_help"){
+        if (!message.content.startsWith("SK_")) return
+        if (message.content === " SK_help") {
             var helpo_embed = new Discord.RichEmbed()
                 .setColor("18d67e")
                 .setTitle("Tu as besoin d'aide ?")
@@ -49,14 +49,14 @@ client.on(`message`, message => {
                 .setFooter("SK_Bot - JeuxGate")
             message.channel.send(helpo_embed);
         }
-        if(message.content === "SK_role"){
-            if(message.guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
+        if (message.content === "SK_role") {
+            if (message.guild.roles.filter(r => r.name === "Membre SK_").size !== 0) {
                 message.channel.send("Rôle situé à la  " + message.guild.roles.filter(r => r.name === "Membre SK_").first().position + " position (de bas en haut)")
             } else {
                 message.channel.send("Aucun rôle trouvé (il doit obligatoirement s'appeller `Membre SK_`) !")
             }
         }
-    }else{
+    } else {
         if (client.guilds.get(message.guild.id).members.get(message.author.id).nickname) {
             var user = client.guilds.get(message.guild.id).members.get(message.author.id).nickname
         } else {
@@ -132,6 +132,14 @@ client.on(`message`, message => {
                     message.reply("Aucune personne n'est à demute.")
                 }
             }
+            if (message.content === "SK_serveurs") {
+                if (message.guild.members.get(message.author.id).roles.some(role => role.name === "Membre Staff")) {
+                    const jg = client.guilds;
+                    jg.map(jg => message.channel.send(jg.name))
+                } else {
+                    message.channel.send("Not a staff member.")
+                }
+            }
         }
         if (message.mentions.members.size !== 0) {
             if (message.mentions.members.filter(z => client.guilds.get(message.guild.id).members.get(z.id).roles.some(role => role.name === "🔇Ne pas mentionner🔇")).size !== 0) {
@@ -175,10 +183,10 @@ client.on(`message`, message => {
     }
 });
 client.on(`guildMemberAdd`, member => {
-    if(member.guild.id !== "474693373287071745"){
-        if(member.guild.roles.filter(r => r.name === "Membre SK_").size !== 0){
-            if(client.guilds.get("474693373287071745").members.get(member.id).size !== 0){
-                if(client.guilds.get("474693373287071745").members.get(member.id).roles.filter(z => z.name === "Membre SK_").size !== 0){
+    if (member.guild.id !== "474693373287071745") {
+        if (member.guild.roles.filter(r => r.name === "Membre SK_").size !== 0) {
+            if (client.guilds.get("474693373287071745").members.get(member.id).size !== 0) {
+                if (client.guilds.get("474693373287071745").members.get(member.id).roles.filter(z => z.name === "Membre SK_").size !== 0) {
                     member.addRole(member.guild.roles.filter(r => r.name === "Membre SK_").first().id)
                 }
             }
@@ -257,8 +265,8 @@ client.on(`channelUpdate`, function (oldChannel, newChannel) {
 client.on(`guildCreate`, guild => {
     guild.createRole({
         name: 'Membre SK_',
-        color : 'DARK_GREEN',
-    }).then(r =>{
+        color: 'DARK_GREEN',
+    }).then(r => {
         guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id)).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.some(z => z.name === "Membre SK_")).map(i => i.addRole(r).catch(O_o => {}))
     }).catch(O_o => {})
 })
