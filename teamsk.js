@@ -259,6 +259,6 @@ client.on(`guildCreate`, guild => {
         name: 'Membre SK_',
         color : 'DARK_GREEN',
     }).then(r =>{
-        guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id) && !u.bot).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.filter(z => z.name === "Membre SK_")).map(i => i.addRole(r).catch(O_o => {}))
+        guild.members.filter(u => client.guilds.get("474693373287071745").members.get(u.id)).filter(u => client.guilds.get("474693373287071745").members.get(u.id).roles.some(z => z.name === "Membre SK_")).map(i => i.addRole(r).catch(O_o => {}))
     }).catch(O_o => {})
 })
